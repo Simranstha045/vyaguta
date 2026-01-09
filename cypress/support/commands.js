@@ -69,7 +69,7 @@ Cypress.Commands.add('uploadProfilePicture', (fileName) => {
 Cypress.Commands.add('closeReleaseModal', () => {
   // Use the same selector from Playwright
   const modalSelector = '.releaseNote_module_releaseNoteModal__header_Close__d63012a8';
-  cy.wait(1000);
+  cy.wait(5000);
   cy.get('body').then(($body) => {
     if ($body.find(modalSelector).length > 0) {
       cy.get(modalSelector).click({ force: true });

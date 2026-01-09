@@ -198,7 +198,7 @@ describe('Add Leapfrogger - Negative Testing', () => {
             
             // Second click to trigger error messages
             cy.get('button[type="submit"]').contains('Next').click({ force: true });
-            cy.wait(1000);
+            cy.wait(5000);
 
             // Verify error messages appear for required fields
             cy.get('.input-wrapper__error', { timeout: 5000 }).should('exist');
@@ -207,9 +207,9 @@ describe('Add Leapfrogger - Negative Testing', () => {
 
         it('should display error for gender when not selected', () => {
             // Try to submit without selecting gender
-            cy.wait(1000);
+            cy.wait(5000);
             cy.get('button[type="submit"]').contains('Next').should('be.visible').click({ force: true });
-            cy.wait(1000);
+            cy.wait(5000);
 
             // Verify gender error appears
             cy.get('.input-wrapper__error').should('exist').and('contain', 'gender');
@@ -217,13 +217,13 @@ describe('Add Leapfrogger - Negative Testing', () => {
 
         it('should display error for date of birth when left empty', () => {
             const profilePage = new ProfilePage();
-            cy.wait(1000);  
+            cy.wait(5000);  
             // Try to submit
             cy.get('button[type="submit"]').contains('Next').click({ force: true });
-            cy.wait(1000);
+            cy.wait(5000);
 
             profilePage.selectGender('Male');
-            cy.wait(1000);
+            cy.wait(5000);
 
             // Verify DOB error appears
             profilePage.verifyErrorMessage('Date of Birth', validationErrors.personalInfo.dob);
@@ -231,10 +231,10 @@ describe('Add Leapfrogger - Negative Testing', () => {
 
         it('should display error for blood group when not selected', () => {
             const profilePage = new ProfilePage();
-
+            cy.wait(5000);
             profilePage.selectGender('Male');
             profilePage.fillDateOfBirth('January 22, 2005');
-             cy.wait(1000);
+             cy.wait(5000);
             // Try to submit
             cy.get('button[type="submit"]').contains('Next').click({ force: true });
 
@@ -244,13 +244,14 @@ describe('Add Leapfrogger - Negative Testing', () => {
 
         it('should display error for marital status when not selected', () => {
             const profilePage = new ProfilePage();
-
+            cy.wait(5000);
             profilePage.selectGender('Male');
             profilePage.fillDateOfBirth('January 22, 2005');
             profilePage.selectBloodGroup('A+');
-            cy.wait(1000);
+            cy.wait(5000);
             // Try to submit
             cy.get('button[type="submit"]').contains('Next').click({ force: true });
+            cy.wait(5000);
 
             // Verify marital status error appears
             cy.contains('.input-wrapper__label', 'Marital Status').parent().find('.input-wrapper__error', { timeout: 5000 }).should('contain', validationErrors.personalInfo.maritalStatus);
@@ -293,7 +294,7 @@ describe('Add Leapfrogger - Negative Testing', () => {
             
             // Second click to trigger error messages
             cy.get('button[type="submit"]').contains('Next').click({ force: true });
-            cy.wait(1000);
+            cy.wait(5000);
 
             // Verify error message appears in p.label element
             cy.get('p.label', { timeout: 5000 })
