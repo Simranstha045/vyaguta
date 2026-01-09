@@ -1,0 +1,29 @@
+{
+  "officialInfo": {
+    "firstName": "Please provide first name",
+    "lastName": "Please provide last name",
+    "email": "Please provide email address",
+    "department": "Please provide department",
+    "leaveIssuer": "Please provide leave issuer",
+    "teamManager": "Please provide team manager",
+    "workingType": "Please provide employee working type",
+    "profilePicture": "Please provide employee image"
+  },
+  "personalInfo": {
+    "gender": "Please provide gender",
+    "dob": "Please provide date of birth",
+    "bloodGroup": "Please provide blood group",
+    "maritalStatus": "Please provide marital status",
+    "personalEmail": "Please provide email",
+    "mobile": "Please provide phone number",
+    "emergencyContact": "Please provide emergency phone number",
+    "emergencyRelation": "Please provide relation with emergency contact",
+    "temporaryAddress": "Please provide temporary address",
+    "permanentAddress": "Please provide permanent address",
+    "country": "Please provide country",
+    "timezone": "Please provide timezone"
+  },
+  "history": {
+    "historyRequirement": "Add at least one designation & employment status"
+  }
+}

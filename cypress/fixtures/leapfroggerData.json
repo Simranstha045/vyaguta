@@ -1,0 +1,43 @@
+{
+  "newLeapfrogger": {
+    "officialInfo": {
+      "firstName": "Harka",
+      "middleName": "Bahadur",
+      "lastName": "Rai",
+      "joiningDate": "January 6, 2026",
+      "department": "Operations",
+      "leaveIssuer": "Rikesh",
+      "teamManager": "Rikesh",
+      "role": "Admin",
+      "experienceYears": "3",
+      "experienceMonths": "6",
+      "employmentType": "Full Time",
+      "cvUrl": "https://leapfrog.com/my-cv",
+      "profilePicturePath": "C:/Users/user/Downloads/certificates/Profile.jpg"
+    },
+    "personalInfo": {
+      "gender": "Male",
+      "dateOfBirth": "January 22, 2005",
+      "bloodGroup": "A+",
+      "maritalStatus": "Single",
+      "personalEmail": "test.personal@gmail.com",
+      "mobilePhone": "9876543210",
+      "emergencyPhone": "9846543210",
+      "emergencyContactRelationship": "Mother",
+      "temporaryAddress": "Dillibazar, Kathmandu, Nepal",
+      "permanentAddress": "Dillibazar, Kathmandu, Nepal",
+      "currentLocation": "Nepal",
+      "timeZone": "+05:45",
+      "githubId": "harka-bahadur-rai"
+    },
+    "history": {
+      "designation": "Associate Software Engineer",
+      "area": "IT",
+      "employmentStatus": "Permanent"
+    },
+    "appraisers": {
+      "appraiser": "Rikesh",
+      "coAppraiser": "Saroj"
+    }
+  }
+}

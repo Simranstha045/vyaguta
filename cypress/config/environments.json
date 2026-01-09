@@ -1,0 +1,6 @@
+{
+  "dev": {
+    "baseUrl": "https://dev.vyaguta.lftechnology.com.np",
+    "apiUrl": "https://dev.vyaguta.lftechnology.com.np/api"
+  }
+}
