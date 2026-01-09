@@ -217,11 +217,13 @@ describe('Add Leapfrogger - Negative Testing', () => {
 
         it('should display error for date of birth when left empty', () => {
             const profilePage = new ProfilePage();
+            cy.wait(1000);  
+            // Try to submit
+            cy.get('button[type="submit"]').contains('Next').click({ force: true });
+            cy.wait(1000);
 
             profilePage.selectGender('Male');
             cy.wait(1000);
-            // Try to submit
-            cy.get('button[type="submit"]').contains('Next').click({ force: true });
 
             // Verify DOB error appears
             profilePage.verifyErrorMessage('Date of Birth', validationErrors.personalInfo.dob);
