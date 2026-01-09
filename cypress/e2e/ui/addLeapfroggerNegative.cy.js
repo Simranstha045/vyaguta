@@ -207,6 +207,7 @@ describe('Add Leapfrogger - Negative Testing', () => {
 
         it('should display error for gender when not selected', () => {
             // Try to submit without selecting gender
+            cy.wait(1000);
             cy.get('button[type="submit"]').contains('Next').should('be.visible').click({ force: true });
             cy.wait(1000);
 
@@ -218,7 +219,7 @@ describe('Add Leapfrogger - Negative Testing', () => {
             const profilePage = new ProfilePage();
 
             profilePage.selectGender('Male');
-
+            cy.wait(1000);
             // Try to submit
             cy.get('button[type="submit"]').contains('Next').click({ force: true });
 
@@ -231,7 +232,7 @@ describe('Add Leapfrogger - Negative Testing', () => {
 
             profilePage.selectGender('Male');
             profilePage.fillDateOfBirth('January 22, 2005');
-
+             cy.wait(1000);
             // Try to submit
             cy.get('button[type="submit"]').contains('Next').click({ force: true });
 
@@ -245,7 +246,7 @@ describe('Add Leapfrogger - Negative Testing', () => {
             profilePage.selectGender('Male');
             profilePage.fillDateOfBirth('January 22, 2005');
             profilePage.selectBloodGroup('A+');
-
+            cy.wait(1000);
             // Try to submit
             cy.get('button[type="submit"]').contains('Next').click({ force: true });
 
@@ -283,7 +284,7 @@ describe('Add Leapfrogger - Negative Testing', () => {
             profilePage.clickNext();
         });
 
-        it.only('should display error when trying to proceed without adding designation and employment status', () => {
+        it('should display error when trying to proceed without adding designation and employment status', () => {
             // First click to attempt navigation
             cy.get('button[type="submit"]').contains('Next').click({ force: true });
             cy.wait(500);

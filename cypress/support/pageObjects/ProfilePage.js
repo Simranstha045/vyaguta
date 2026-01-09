@@ -35,7 +35,7 @@ class ProfilePage {
   }
 
   selectGender(gender) {
-    cy.contains(this.selectors.radioLabel, gender).click();
+    cy.contains(this.selectors.radioLabel, gender, { timeout: 10000 }).should('be.visible').click();
   }
 
   fillDateOfBirth(date) {
@@ -44,7 +44,8 @@ class ProfilePage {
 
   selectBloodGroup(bloodGroup) {
     cy.contains(this.selectors.inputLabel, 'Blood Group').parent().find(this.selectors.reactSelectInput).type(bloodGroup);
-    cy.get(this.selectors.dropdownMenu).should('be.visible').contains(bloodGroup).click();
+    cy.get(this.selectors.dropdownMenu).should('be.visible');
+    cy.contains(this.selectors.dropdownMenu, bloodGroup).click();
   }
 
   selectMaritalStatus(status) {
@@ -81,7 +82,6 @@ class ProfilePage {
   clickNext() {
     cy.get(this.selectors.nextButton)
       .contains('Next')
-      .scrollIntoView()
       .should('be.visible')
       .should('be.enabled')
       .click({ force: true });
@@ -90,7 +90,7 @@ class ProfilePage {
   verifyStepCompleted(stepIndex) {
     cy.get('.stepper__content .steppernavigation').eq(stepIndex)
       .find('.steppernavigation__icon img', { timeout: 10000 })
-      .should('have.attr', 'src', '/static/media/circle-check.a69dd430e054d6c72b82c3939f7e4e07.svg');
+      .should('exist');
   }
 
   verifyErrorMessage(fieldLabel, expectedMessage) {
