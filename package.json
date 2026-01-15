@@ -20,7 +20,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^12.17.4"
+    "@faker-js/faker": "^10.2.0",
+    "cypress": "^15.8.2"
   },
   "dependencies": {
     "cypress-real-events": "^1.15.0"

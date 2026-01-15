@@ -1,27 +1,29 @@
 // Official Information Page Object
 class OfficialInfoPage {
-  constructor() {
-    this.selectors = {
-      firstNameInput: '[name="firstName"]',
-      middleNameInput: '[name="middleName"]',
-      lastNameInput: '[name="lastName"]',
-      dateInput: '#date',
-      recruiteeUrlInput: '[name="recruiteeUrl"]',
-      usernameInput: '[name="username"]',
-      departmentInput: '#react-select-2-input',
-      leaveIssuerInput: '#react-select-3-input',
-      teamManagerInput: '#react-select-4-input',
-      rolesInput: '#react-select-5-input',
-      dropdownMenu: '[class$="-menu"]',
-      dropdownOption: '[class*="option"]',
-      pastExperienceYearsInput: '[name="pastExperienceYears"]',
-      pastExperienceMonthsInput: '[name="pastExperienceMonths"]',
-      cvUrlInput: 'input[name="cvUrl"]',
-      fileInput: 'input[type="file"]',
-      nextButton: 'button[type="submit"]',
-      errorMessage: '.error-message, .input-wrapper__error, .form__error'
-    };
-  }
+  selectors = {
+    firstNameInput: '[name="firstName"]',
+    middleNameInput: '[name="middleName"]',
+    lastNameInput: '[name="lastName"]',
+    dateInput: '#date',
+    recruiteeUrlInput: '[name="recruiteeUrl"]',
+    usernameInput: '[name="username"]',
+    departmentInput: '#react-select-2-input',
+    leaveIssuerInput: '#react-select-3-input',
+    teamManagerInput: '#react-select-4-input',
+    rolesInput: '#react-select-5-input',
+    dropdownMenu: '[class$="-menu"]',
+    dropdownOption: '[class*="option"]',
+    pastExperienceYearsInput: '[name="pastExperienceYears"]',
+    pastExperienceMonthsInput: '[name="pastExperienceMonths"]',
+    cvUrlInput: 'input[name="cvUrl"]',
+    fileInput: 'input[type="file"]',
+    nextButton: 'button[type="submit"]',
+    errorMessage: '.error-message, .input-wrapper__error, .form__error',
+    stepTitle: 'p.title',
+    stepperNavigation: '.stepper__content .steppernavigation',
+    stepperIcon: '.steppernavigation__icon img',
+    completedCheckIcon: '/static/media/circle-check.a69dd430e054d6c72b82c3939f7e4e07.svg',
+  };
 
   fillBasicInformation(firstName, middleName, lastName, date, recruiteeUrl, username) {
     if (firstName) cy.get(this.selectors.firstNameInput).type(firstName);
@@ -72,11 +74,20 @@ class OfficialInfoPage {
     cy.get(this.selectors.nextButton).contains('Next').should('be.visible').should('be.enabled').click({ force: true }).click({ force: true });
   }
 
-  verifyStepCompleted(stepIndex) {
-    cy.get('.stepper__content .steppernavigation').eq(stepIndex)
-      .find('.steppernavigation__icon img', { timeout: 10000 })
-      .should('have.attr', 'src', '/static/media/circle-check.a69dd430e054d6c72b82c3939f7e4e07.svg');
+  clickStepTitle() {
+    cy.contains(this.selectors.stepTitle, 'Official Information').should('be.visible').click();
   }
+
+  attemptNext() {
+    cy.get(this.selectors.nextButton).contains('Next').click({ force: true });
+  }
+
+  verifyStepCompleted(stepIndex) {
+    cy.get(this.selectors.stepperNavigation).eq(stepIndex)
+      .find(this.selectors.stepperIcon, { timeout: 10000 })
+      .should('have.attr', 'src', this.selectors.completedCheckIcon);
+  }
+
 
   verifyErrorMessage(fieldLabel, expectedMessage) {
     cy.contains('.input-wrapper__label', fieldLabel)

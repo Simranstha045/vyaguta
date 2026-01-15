@@ -56,15 +56,6 @@ Cypress.Commands.add('loginViaOAuth', () => {
   );
 });
 
-// Upload profile picture
-Cypress.Commands.add('uploadProfilePicture', (fileName) => {
-  // We use { force: true } if the actual <input type="file"> is hidden by the UI
-  cy.get('input[type="file"]').selectFile(`cypress/fixtures/${fileName}`, {
-    force: true,
-    action: 'drag-drop' // Simulates the drag-and-drop behavior
-  });
-});
-
 // Close release modal if it appears
 Cypress.Commands.add('closeReleaseModal', () => {
   // Use the same selector from Playwright
