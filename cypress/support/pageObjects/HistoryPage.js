@@ -17,25 +17,25 @@ class HistoryPage {
 
   addDesignation(designation, area) {
     cy.contains(this.selectors.buttonLabel, 'Add New Designation').should('be.visible').click({ force: true });
-    cy.contains(this.selectors.fieldLabel, 'Designation').parent().find('input[id^="react-select"]').type(`${designation}{enter}`);
-    cy.wait(500); // Wait for area dropdown to populate based on designation
-    cy.contains(this.selectors.fieldLabel, 'Area').parent().find('input[id^="react-select"]').type(`${area}{enter}`);
-    cy.wait(500); // Wait for employment status dropdown to populate based on area
+    cy.contains(this.selectors.fieldLabel, 'Designation').should('exist').should('be.visible').parent().find('input[id^="react-select"]').type(`${designation}{enter}`);
+    // cy.wait(500); // Wait for area dropdown to populate based on designation
+    cy.contains(this.selectors.fieldLabel, 'Area').should('exist').should('be.visible').parent().find('input[id^="react-select"]').should('exist').should('be.visible').type(`${area}{enter}`);
+    // cy.wait(500); // Wait for employment status dropdown to populate based on area
     cy.contains(this.selectors.addAndCloseButton, 'Add & Close').click({ force: true });
   }
 
   addEmploymentStatus(status) {
-    cy.contains(this.selectors.buttonLabel, 'Add New Employment Status').should('be.visible').click({ force: true });
-    cy.contains(this.selectors.fieldLabel, 'Employment Status').parent().find('input[id^="react-select"]').type(`${status}{enter}`);
+    cy.contains(this.selectors.buttonLabel, 'Add New Employment Status').should('exist').should('be.visible').click({ force: true });
+    cy.contains(this.selectors.fieldLabel, 'Employment Status').should('exist').should('be.visible').parent().find('input[id^="react-select"]').should('exist').should('be.visible').type(`${status}{enter}`);
     cy.contains(this.selectors.addAndCloseButton, 'Add & Close').click({ force: true });
   }
 
   clickNext() {
-    cy.get(this.selectors.nextButton).contains('Next').should('be.visible').should('be.enabled').click({ force: true }).click({ force: true });
+     cy.get(this.selectors.nextButton).should('exist').and('be.visible').contains('Next').should('be.visible').should('be.enabled').click({ force: true }).click({ force: true });
   }
 
   clickStepTitle() {
-    cy.contains(this.selectors.stepTitle, 'Leapfrog History').should('be.visible').click();
+    cy.contains(this.selectors.stepTitle, 'Leapfrog History').should('exist').should('be.visible').click();
   }
 
   attemptNext() {

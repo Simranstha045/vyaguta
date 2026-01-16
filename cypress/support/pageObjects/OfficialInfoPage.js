@@ -23,6 +23,7 @@ class OfficialInfoPage {
     stepperNavigation: '.stepper__content .steppernavigation',
     stepperIcon: '.steppernavigation__icon img',
     completedCheckIcon: '/static/media/circle-check.a69dd430e054d6c72b82c3939f7e4e07.svg',
+    imagecontainer: '.image-selected__image-container'
   };
 
   fillBasicInformation(firstName, middleName, lastName, date, recruiteeUrl, username) {
@@ -86,6 +87,12 @@ class OfficialInfoPage {
     cy.get(this.selectors.stepperNavigation).eq(stepIndex)
       .find(this.selectors.stepperIcon, { timeout: 10000 })
       .should('have.attr', 'src', this.selectors.completedCheckIcon);
+  }
+
+    verifyImageUploaded() {
+    cy.get(this.selectors.imagecontainer)
+      .should('exist')
+      .and('be.visible');
   }
 
 

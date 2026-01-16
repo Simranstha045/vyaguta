@@ -54,7 +54,9 @@ describe('Add Leapfrogger', () => {
         officialInfoPage.selectEmploymentType(leapfroggerData.officialInfo.employmentType);
         officialInfoPage.fillCvUrl(leapfroggerData.officialInfo.cvUrl);
         officialInfoPage.uploadProfilePicture(leapfroggerData.officialInfo.profilePicturePath);
-        cy.wait(500); // Wait for upload to complete
+
+        // Wait for upload to complete
+        officialInfoPage.verifyImageUploaded();                    
         officialInfoPage.clickNext();
         officialInfoPage.verifyStepCompleted(0);
 
@@ -75,14 +77,14 @@ describe('Add Leapfrogger', () => {
         // ========== STEP 3: LEAPFROG HISTORY ==========
         historyPage.addDesignation(leapfroggerData.history.designation, leapfroggerData.history.area);
         historyPage.addEmploymentStatus(leapfroggerData.history.employmentStatus);
-        cy.wait(500); // Wait for any async operations
+        // cy.wait(500); // Wait for any async operations
         historyPage.clickNext();
         historyPage.verifyStepCompleted(2);
 
         // ========== STEP 4: APPRAISERS ==========
         appraisersPage.selectAppraiser(leapfroggerData.appraisers.appraiser);
         appraisersPage.selectCoAppraiser(leapfroggerData.appraisers.coAppraiser);
-        cy.wait(500); // Wait for any async operations
+        // cy.wait(500); // Wait for any async operations
         appraisersPage.verifyStepCompleted(3);
 
         // ========== SAVE LEAPFROGGER ==========
