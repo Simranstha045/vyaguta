@@ -8,12 +8,14 @@ class AppraisersPage {
     completedCheckIcon: '/static/media/circle-check.a69dd430e054d6c72b82c3939f7e4e07.svg',
     saveButton: 'button.btn.btn--primary[type="submit"]',
     stepTitle: 'p.title',
-    errorMessage: '.input-wrapper__error'
+    errorMessage: '.input-wrapper__error',
+    dropdownSelector: 'input[id^="react-select"]',
+    dropdownMenu: '[class$="-menu"]'
   };
 
   selectAppraiser(name) {
     cy.intercept('GET', '**api/core/users*').as('searchUser');
-    cy.contains('.input-wrapper__label', 'Appraiser').parent().find('input[id^="react-select"]')
+    cy.contains('.input-wrapper__label', 'Appraiser').parent().find(this.selectors.dropdownSelector)
       .type(name);
      cy.wait('@searchUser').then((interception) => {
       expect(interception.response.statusCode).to.eq(200)
@@ -31,18 +33,18 @@ class AppraisersPage {
       
       // Verify the user appears in the dropdown UI
       const fullName = `${matchedUser.firstName} ${matchedUser.middleName} ${matchedUser.lastName}`;
-      cy.get('[class$="-menu"]').should('be.visible').within(() => {
+      cy.get(this.selectors.dropdownMenu).should('be.visible').within(() => {
         cy.contains(fullName).should('be.visible');
       });
       
       // Select the user
-      cy.get('input[id^="react-select"]').eq(0).type('{enter}');
+      cy.get(this.selectors.dropdownSelector).eq(0).type('{enter}');
     });
   }
 
   selectCoAppraiser(name) {
     cy.intercept('GET', '**api/core/users*').as('searchUser');
-    cy.contains('.input-wrapper__label', 'Co Appraiser').parent().find('input[id^="react-select"]')
+    cy.contains('.input-wrapper__label', 'Co Appraiser').parent().find(this.selectors.dropdownSelector)
       .type(name);
     cy.wait('@searchUser').then((interception) => {
       expect(interception.response.statusCode).to.eq(200);
@@ -60,17 +62,17 @@ class AppraisersPage {
       
       // Verify the user appears in the dropdown UI
       const fullName = `${matchedUser.firstName} ${matchedUser.lastName}`;
-      cy.get('[class$="-menu"]').should('be.visible').within(() => {
+      cy.get(this.selectors.dropdownMenu).should('be.visible').within(() => {
         cy.contains(fullName).should('be.visible');
       });
       
       // Select the user
-      cy.get('input[id^="react-select"]').eq(1).type('{enter}');
+      cy.get(this.selectors.dropdownSelector).eq(1).type('{enter}');
     });
   }
 
   clickNext() {
-    cy.get(this.selectors.nextButton).should('be.visible').contains('Next').click({ force: true });
+    cy.get(this.selectors.nextButton).should('be.visible').contains('Next').click();
   }
 
   clickStepTitle() {
@@ -92,7 +94,7 @@ class AppraisersPage {
   }
 
   clickSave() { 
-    cy.get(this.selectors.saveButton).contains('Save').should('be.visible').click({ force: true });
+    cy.get(this.selectors.saveButton).should('be.visible').should('exist').contains('Save').click({ force: true });
   }
 }
 

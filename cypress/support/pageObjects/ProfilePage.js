@@ -41,13 +41,13 @@ class ProfilePage {
   }
 
   fillDateOfBirth(date) {
-    cy.get(this.selectors.dateInput).type(date);
+    cy.get(this.selectors.dateInput).should('be.visible').type(date);
   }
 
   selectBloodGroup(bloodGroup) {
-    cy.contains(this.selectors.inputLabel, 'Blood Group').parent().find(this.selectors.reactSelectInput).type(bloodGroup);
+    cy.contains(this.selectors.inputLabel, 'Blood Group').parent().find(this.selectors.reactSelectInput).should('be.visible').type(bloodGroup);
     cy.get(this.selectors.dropdownMenu).should('be.visible');
-    cy.contains(this.selectors.dropdownMenu, bloodGroup).click();
+    cy.contains(this.selectors.dropdownMenu, bloodGroup).should('be.visible').click();
   }
 
   selectMaritalStatus(maritalStatus) {
@@ -55,30 +55,30 @@ class ProfilePage {
   }
 
   fillContactInformation(email, phone) {
-    cy.get(this.selectors.personalEmailInput).type(email);
-    cy.get(this.selectors.mobilePhoneInput).type(phone);
+    cy.get(this.selectors.personalEmailInput).should('be.visible').type(email);
+    cy.get(this.selectors.mobilePhoneInput).should('be.visible').type(phone);
   }
 
   fillEmergencyContact(phone, relationship) {
-    cy.get(this.selectors.emergencyPhoneInput).type(phone);
-    cy.get(this.selectors.emergencyRelationshipInput).type(relationship);
+    cy.get(this.selectors.emergencyPhoneInput).should('be.visible').type(phone);
+    cy.get(this.selectors.emergencyRelationshipInput).should('be.visible').type(relationship);
   }
 
   fillAddressInformation(temporaryAddress, permanentAddress) {
-    cy.get(this.selectors.temporaryAddressInput).type(temporaryAddress);
-    cy.get(this.selectors.permanentAddressInput).type(permanentAddress);
+    cy.get(this.selectors.temporaryAddressInput).should('be.visible').type(temporaryAddress);
+    cy.get(this.selectors.permanentAddressInput).should('be.visible').type(permanentAddress);
   }
 
   selectCurrentLocation(location) {
-    cy.contains(this.selectors.inputLabel, 'Currently Located at').parent().find(this.selectors.reactSelectInput).type(`${location}{enter}`);
+    cy.contains(this.selectors.inputLabel, 'Currently Located at').should('be.visible').parent().find(this.selectors.reactSelectInput).should('be.visible').type(`${location}{enter}`);
   }
 
   selectTimeZone(timeZone) {
-    cy.contains(this.selectors.inputLabel, 'Time Zone').parent().find(this.selectors.reactSelectInput).type(`${timeZone}{enter}`);
+    cy.contains(this.selectors.inputLabel, 'Time Zone').should('be.visible').parent().find(this.selectors.reactSelectInput).should('be.visible').type(`${timeZone}{enter}`);
   }
 
   fillGithubId(githubId) {
-    cy.get(this.selectors.githubIdInput).type(githubId);
+    cy.get(this.selectors.githubIdInput).should('be.visible').type(githubId);
   }
 
   clickNext() {
@@ -94,11 +94,11 @@ class ProfilePage {
   }
 
   attemptNext() {
-    cy.get(this.selectors.nextButton).contains('Next').click({ force: true });
+    cy.get(this.selectors.nextButton).should('be.visible').contains('Next').click({ force: true });
   }
 
-  verifyStepCompleted(stepIndex) {
-    cy.get(this.selectors.stepperNavigation).eq(stepIndex)
+   verifyStepCompleted(stepIndex) {
+    cy.get(this.selectors.stepperNavigation).should('exist').should('be.visible').eq(stepIndex)
       .find(this.selectors.stepperIcon, { timeout: 10000 })
       .should('have.attr', 'src', this.selectors.completedCheckIcon);
   }

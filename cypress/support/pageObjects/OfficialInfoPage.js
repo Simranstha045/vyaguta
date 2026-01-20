@@ -23,56 +23,58 @@ class OfficialInfoPage {
     stepperNavigation: '.stepper__content .steppernavigation',
     stepperIcon: '.steppernavigation__icon img',
     completedCheckIcon: '/static/media/circle-check.a69dd430e054d6c72b82c3939f7e4e07.svg',
-    imagecontainer: '.image-selected__image-container'
+    imagecontainer: '.image-selected__image-container',
+    wrapperLabel: '.input-wrapper__label',
+    radioButton: '.radio-label__content'
   };
 
   fillBasicInformation(firstName, middleName, lastName, date, recruiteeUrl, username) {
-    if (firstName) cy.get(this.selectors.firstNameInput).type(firstName);
-    if (middleName) cy.get(this.selectors.middleNameInput).type(middleName);
-    if (lastName) cy.get(this.selectors.lastNameInput).type(lastName);
-    if (date) cy.get(this.selectors.dateInput).type(date);
-    if (recruiteeUrl) cy.get(this.selectors.recruiteeUrlInput).type(recruiteeUrl);
-    if (username) cy.get(this.selectors.usernameInput).type(username);
+    if (firstName) cy.get(this.selectors.firstNameInput).should('be.visible').type(firstName);
+    if (middleName) cy.get(this.selectors.middleNameInput).should('be.visible').type(middleName);
+    if (lastName) cy.get(this.selectors.lastNameInput).should('be.visible').type(lastName);
+    if (date) cy.get(this.selectors.dateInput).should('be.visible').type(date);
+    if (recruiteeUrl) cy.get(this.selectors.recruiteeUrlInput).should('be.visible').type(recruiteeUrl);
+    if (username) cy.get(this.selectors.usernameInput).should('be.visible').type(username);
   }
 
   selectDepartment(department) {
-    cy.get(this.selectors.departmentInput).type(`${department}{enter}`);
+    cy.get(this.selectors.departmentInput).should('be.visible').type(`${department}{enter}`);
   }
 
   selectLeaveIssuer(name) {
-    cy.get(this.selectors.leaveIssuerInput).type(name);
+    cy.get(this.selectors.leaveIssuerInput).should('be.visible').type(name);
     cy.get(this.selectors.dropdownMenu).should('be.visible').contains(name).click();
   }
 
   selectTeamManager(name) {
-    cy.get(this.selectors.teamManagerInput).type(name);
+    cy.get(this.selectors.teamManagerInput).should('be.visible').type(name);
     cy.get(this.selectors.dropdownMenu).should('be.visible').contains(name).click();
   }
 
   selectRole(role) {
-    cy.get(this.selectors.rolesInput).click().type(role);
-    cy.get(this.selectors.dropdownOption).first().click({ force: true });
+    cy.get(this.selectors.rolesInput).should('be.visible').click().type(role);
+    cy.get(this.selectors.dropdownOption).should('be.visible').first().click({ force: true });
   }
 
   fillExperience(years, months) {
-    cy.get(this.selectors.pastExperienceYearsInput).type(years);
-    cy.get(this.selectors.pastExperienceMonthsInput).type(months);
+    cy.get(this.selectors.pastExperienceYearsInput).should('be.visible').type(years);
+    cy.get(this.selectors.pastExperienceMonthsInput).should('be.visible').type(months);
   }
 
   selectEmploymentType(type) {
-    cy.contains('.radio-label__content', type).click();
+    cy.contains(this.selectors.radioButton, type).should('be.visible').click();
   }
 
   fillCvUrl(url) {
-    cy.get(this.selectors.cvUrlInput).type(url);
+    cy.get(this.selectors.cvUrlInput).should('be.visible').type(url);
   }
 
   uploadProfilePicture(filePath) {
-    cy.get(this.selectors.fileInput).first().selectFile(filePath, { force: true });
+    cy.get(this.selectors.fileInput).selectFile(filePath, { force: true });
   }
 
   clickNext() {
-    cy.get(this.selectors.nextButton).contains('Next').should('be.visible').should('be.enabled').click({ force: true }).click({ force: true });
+    cy.get(this.selectors.nextButton).should('be.visible').should('be.enabled').contains('Next').click({ force: true });
   }
 
   clickStepTitle() {
@@ -80,11 +82,11 @@ class OfficialInfoPage {
   }
 
   attemptNext() {
-    cy.get(this.selectors.nextButton).contains('Next').click({ force: true });
+    cy.get(this.selectors.nextButton).should('be.visible').contains('Next').click({ force: true });
   }
 
   verifyStepCompleted(stepIndex) {
-    cy.get(this.selectors.stepperNavigation).eq(stepIndex)
+    cy.get(this.selectors.stepperNavigation).should('exist').should('be.visible').eq(stepIndex)
       .find(this.selectors.stepperIcon, { timeout: 10000 })
       .should('have.attr', 'src', this.selectors.completedCheckIcon);
   }
@@ -97,7 +99,7 @@ class OfficialInfoPage {
 
 
   verifyErrorMessage(fieldLabel, expectedMessage) {
-    cy.contains('.input-wrapper__label', fieldLabel)
+    cy.contains(this.selectors.wrapperLabel, fieldLabel)
       .parent()
       .find(this.selectors.errorMessage, { timeout: 5000 })
       .should('contain', expectedMessage);

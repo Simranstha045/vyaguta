@@ -14,6 +14,7 @@ Cypress.Commands.add('loginViaOAuth', () => {
       cy.request({
         method: 'GET',
         url: `${authUrl}?clientId=${clientId}&token=${token}`,
+        timeout: 30000, // Increase from default 10000ms
         failOnStatusCode: false
       }).then((response) => {
         expect(response.status).to.eq(200);
@@ -71,7 +72,7 @@ Cypress.Commands.add('closeReleaseModal', () => {
   // });
   cy.get(modalSelector).its('length').then(len => {
     if (len > 0) {
-      cy.get(modalSelector).click({ force: true });
+      cy.get(modalSelector).should('exist').should('be.visible').click({ force: true });
     }
   })
 });

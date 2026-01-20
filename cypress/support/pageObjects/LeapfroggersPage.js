@@ -6,7 +6,7 @@ class LeapfroggersPage {
   };
 
   clickAddLeapfrogger() {
-    cy.get(this.selectors.addLeapfroggerButton, { timeout: 10000 }).should('be.visible').click();
+    cy.get(this.selectors.addLeapfroggerButton, { timeout: 10000 }).should('exist').should('be.visible').click();
   }
 }
 

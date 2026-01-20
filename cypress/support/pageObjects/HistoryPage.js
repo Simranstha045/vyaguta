@@ -43,7 +43,7 @@ class HistoryPage {
   }
 
   verifyStepCompleted(stepIndex) {
-    cy.get(this.selectors.stepperNavigation).eq(stepIndex)
+    cy.get(this.selectors.stepperNavigation).should('exist').should('be.visible').eq(stepIndex)
       .find(this.selectors.stepperIcon, { timeout: 10000 })
       .should('have.attr', 'src', this.selectors.completedCheckIcon);
   }
